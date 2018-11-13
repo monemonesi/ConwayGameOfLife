@@ -4,9 +4,50 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConwayGameOfLife.View"
+        xmlns:vm ="clr-namespace:ConwayGameOfLife.ViewModel"
         mc:Ignorable="d"
-        Title="GameOfLifeView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Conway's Game Of Life"
+        MinHeight="600" MinWidth="800"
+        Height="600" Width="800" WindowStartupLocation="CenterScreen"
+        Background="#FFFFFF">
+        <!--Colours references: CoolSky on UIGradients.com--> 
+    <Window.Resources>
+        <vm:GameOfLifeViewModel x:Key="vm"/>
+        <!--<Style>
+            
+        </Style>-->
+    </Window.Resources>
+    
+    <!--<Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+    </Grid>-->
+    <StackPanel Margin="10">
+        <Button Name="evolveButton" Content="Evolve" Margin="2"/>
+        <Button Name="resetButton" Content="Reset" Margin="2"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Name="universeSizeLabel" Grid.Column="0"
+                   Content="Universe Size TOTxTOT"/>
+            <Label Name="generationNumLabel" Grid.Column="1"
+                   HorizontalAlignment="Center"
+                   Content=" Generation # : ####"/>
+            <Label Name="linkToWikiRef" Grid.Column="2"
+                   HorizontalAlignment="Right"
+                   Content="wiki@vmvvns.mvavnv"/>
+        </Grid>
+    </StackPanel>
 </Window>
