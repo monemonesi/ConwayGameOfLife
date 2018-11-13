@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConwayGameOfLife.Model
 {
-    class CellState
+    public enum CellState
     {
+        Alive,
+        Dead
     }
 }
