@@ -55,8 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\CellState.cs" />
     <Compile Include="Model\LifeRules.cs" />
+    <Compile Include="Model\ObservableBase.cs" />
     <Compile Include="ViewModel\GameOfLifeViewModel.cs" />
     <Compile Include="View\GameOfLifeView.xaml.cs">
       <DependentUpon>GameOfLifeView.xaml</DependentUpon>
@@ -96,6 +98,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\Commands\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
