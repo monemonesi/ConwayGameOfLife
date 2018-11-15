@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConwayGameOfLife.ViewModel
 {
-    class GameOfLifeViewModel
+    public class GameOfLifeViewModel
     {
     }
 }

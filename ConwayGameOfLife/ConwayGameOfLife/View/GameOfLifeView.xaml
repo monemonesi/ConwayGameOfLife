@@ -40,8 +40,12 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Name="universeSizeLabel" Grid.Column="0"
-                   Content="Universe Size TOTxTOT"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <Label Content="Universe Size: "/>
+                <TextBox Name="numberOfRows" Width="30"/>
+                <Label Content=" x "/>
+                <TextBox Name="numberOfColumns" Width="30"/>
+            </StackPanel>
             <Label Name="generationNumLabel" Grid.Column="1"
                    HorizontalAlignment="Center"
                    Content=" Generation # : ####"/>

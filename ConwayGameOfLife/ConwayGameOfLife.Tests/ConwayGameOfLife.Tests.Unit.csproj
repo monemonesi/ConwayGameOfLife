@@ -49,8 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellTests.cs" />
+    <Compile Include="GameOfLifeWorldTests.cs" />
     <Compile Include="LifeRulesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UniverseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -57,8 +57,10 @@
     </ApplicationDefinition>
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\CellState.cs" />
+    <Compile Include="Model\GameOfLifeWorld.cs" />
     <Compile Include="Model\LifeRules.cs" />
     <Compile Include="Model\ObservableBase.cs" />
+    <Compile Include="Model\Universe.cs" />
     <Compile Include="ViewModel\GameOfLifeViewModel.cs" />
     <Compile Include="View\GameOfLifeView.xaml.cs">
       <DependentUpon>GameOfLifeView.xaml</DependentUpon>

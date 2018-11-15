@@ -9,8 +9,10 @@ namespace ConwayGameOfLife.Model
     public class Cell : ObservableBase
     {
         private CellState _currentCellState;
+
         public int Row { get; set; }
         public int Column { get; set; }
+        public int IndexCell { get; set; }
 
         #region Constructors
         public Cell(int _row, int _col)
@@ -25,6 +27,18 @@ namespace ConwayGameOfLife.Model
             Row = _row;
             Column = _col;
             CurrentCellState = _cellState;
+        }
+
+        public Cell(int idCell)
+        {
+            IndexCell =idCell;
+            CurrentCellState = CellState.Dead;
+        }
+
+        public Cell(int idCell, CellState cellState)
+        {
+            IndexCell = idCell;
+            CurrentCellState = cellState;
         }
         #endregion
 
