@@ -10,9 +10,20 @@ namespace ConwayGameOfLife.Model
     {
         private CellState _currentCellState;
 
+        public CellState CurrentCellState
+        {
+            get { return _currentCellState; }
+            set
+            {
+                _currentCellState = value;
+                OnNotifyPropertyChanged();
+            }
+        }
         public int Row { get; set; }
         public int Column { get; set; }
         public int IndexCell { get; set; }
+        public List<int> Neighbours { get; set; }
+
 
         #region Constructors
         public Cell(int _row, int _col)
@@ -42,15 +53,7 @@ namespace ConwayGameOfLife.Model
         }
         #endregion
 
-        public CellState CurrentCellState
-        {
-            get { return _currentCellState; }
-            set
-            {
-                _currentCellState = value;
-                OnNotifyPropertyChanged();
-            }
-        }
+        
 
     }
 }

@@ -52,5 +52,7 @@ namespace ConwayGameOfLife.Tests
 
             Assert.AreEqual(cellState, currentState);
         }
+
+
     }
 }

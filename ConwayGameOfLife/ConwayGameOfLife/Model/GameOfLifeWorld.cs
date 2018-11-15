@@ -21,14 +21,14 @@ namespace ConwayGameOfLife.Model
         }
 
 
-        public GameOfLifeWorld(int rows, int cols)
+        public GameOfLifeWorld(int numberOfRows, int numberOfCols)
         {
-            Rows = rows;
-            Columns = cols;
-            InitialiseUniverse();
+            Rows = numberOfRows;
+            Columns = numberOfCols;
+            InitialiseGameOfLifeWorld();
         }
 
-        private void InitialiseUniverse()
+        private void InitialiseGameOfLifeWorld()
         {
             GridCells = new ObservableCollection<Cell>();
             int index = 0;
@@ -42,9 +42,14 @@ namespace ConwayGameOfLife.Model
             }
         }
 
-        //public Cell GetCell(int indexCell)
-        //{
-        //    return GridCells[indexCell];
-        //}
+        public Cell GetCellByLocation(int findRow, int findCol)
+        {
+            if (findRow >= Rows || findRow < 0)
+                return null;
+            if (findCol >= Columns || findCol < 0)
+                return null;
+            int indexCell = findRow * Columns + findCol;
+            return GridCells[indexCell];
+        }
     }
 }
