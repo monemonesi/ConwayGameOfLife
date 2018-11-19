@@ -21,8 +21,32 @@ namespace ConwayGameOfLife.Model
         }
         public int TotalRows { get; set; }
         public int TotalColumns { get; set; }
+        //private int _totalRows;
 
-        
+        //public int TotalRows
+        //{
+        //    get { return _totalRows; }
+        //    set
+        //    {
+        //        _totalRows = value;
+        //        OnNotifyPropertyChanged();
+        //    }
+        //}
+
+        //private int _totalColumns;
+
+        //public int TotalColumns
+        //{
+        //    get { return _totalColumns; }
+        //    set
+        //    {
+        //        _totalColumns = value;
+        //        OnNotifyPropertyChanged();
+        //    }
+        //}
+
+
+
 
         public Dictionary<int, IList<int>> NeighboursId { get; set; }
 

@@ -8,51 +8,81 @@
         mc:Ignorable="d"
         Title="Conway's Game Of Life"
         MinHeight="600" MinWidth="800"
-        Height="600" Width="800" WindowStartupLocation="CenterScreen"
+        Height="600" Width="600" WindowStartupLocation="CenterScreen"
         Background="#FFFFFF">
         
     <Window.Resources>
         <vm:GameOfLifeVM x:Key="vm"/>
-        <!--<Style>
-            
-        </Style>-->
     </Window.Resources>
 
 
-    <StackPanel DataContext="{StaticResource vm}" Margin="10">
-        <Button Name="evolveButton" Content="Evolve" Margin="2"/>
-        <Button Name="resetButton" Content="Reset" Margin="2"/>
+    <!--<StackPanel DataContext="{StaticResource vm}" Margin="10">-->
+        <Grid DataContext="{StaticResource vm}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Button Name="evolveButton" Content="Evolve" Margin="2" Grid.Row="0"/>
+        <Button Name="resetButton" Content="Reset" Margin="2" Grid.Row="1"/>
         <Label Content="Left Click on the cell you want to bring to life, then push the Evolve Button!" 
-               HorizontalAlignment="Center"/>
-        <ItemsControl Name="Universe" ItemsSource="{Binding GameOfLifeWorld.GridCells, Mode=OneWay}">
+               HorizontalAlignment="Center" Grid.Row="2"/>
+        <ItemsControl Name="Universe" ItemsSource="{Binding GameOfLifeWorld.GridCells, Mode=OneWay}" Grid.Row="3">
             <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate/>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding GameOfLifeWorld.TotalColumns, Mode=TwoWay}"
+                                Rows="{Binding GameOfLifeWorld.TotalRows, Mode=TwoWay}"/>
+                </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Style="{StaticResource cellStyleDead}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Grid>
+
+        <Grid Grid.Row="4" Margin="0 5 0 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Column="0">
+            <!--<StackPanel Orientation="Horizontal" Grid.Column="0">
                 <Label Content="Universe Size: "/>
                 <TextBox Name="numberOfRows"
                          Text="{Binding GameOfLifeWorld.TotalRows, Mode=TwoWay,
-                                UpdateSourceTrigger=LostFocus}"
+                                UpdateSourceTrigger=PropertyChanged}"
                          Width="30"/>
                 <Label Content=" x "/>
                 <TextBox Name="numberOfColumns" 
                          Text="{Binding GameOfLifeWorld.TotalColumns, Mode=TwoWay,
-                                UpdateSourceTrigger=LostFocus}"
+                                UpdateSourceTrigger=PropertyChanged}"
                          Width="30"/>
-            </StackPanel>
-            <Label Name="generationNumLabel" Grid.Column="1"
+            </StackPanel>-->
+            <!--<Label Name="generationNumLabel" Grid.Column="1"
                    HorizontalAlignment="Center"
                    Content=" Generation # : ####"/>
             <Label Name="linkToWikiRef" Grid.Column="2"
                    HorizontalAlignment="Right"
-                   Content="wiki@vmvvns.mvavnv"/>
+                   Content="wiki@vmvvns.mvavnv"/>-->
+            <TextBlock Name="UniverseInfo" Grid.Column="0"
+                   HorizontalAlignment="Left">
+                <Run Text="Universe size = "/>
+                <Run Text="{Binding GameOfLifeWorld.TotalRows}"/>
+                <Run Text=" x "/>
+                <Run Text="{Binding GameOfLifeWorld.TotalColumns}"/>
+            </TextBlock>
+            <TextBlock Name="generationNumber" Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       Text="Generation # : ######"/>
+            <TextBlock Name="linkRef" Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       Text="lnvfeisvnlsoe@sldvnslov.com"/>
+
         </Grid>
-    </StackPanel>
+    
+    </Grid>
 </Window>
