@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:ConwayGameOfLife"
              StartupUri="View\GameOfLifeView.xaml">
     <Application.Resources>
-         
+        <!-- TODO: Update Colours references: CoolSky on UIGradients.com-->
+        <Style TargetType="Rectangle" x:Key="cellStyleAlive">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Fill" Value="Azure"/>
+        </Style>
+        <Style TargetType="Rectangle" x:Key="cellStyleDead">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Fill" Value="LightGray"/>
+        </Style>
     </Application.Resources>
 </Application>

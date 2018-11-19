@@ -10,7 +10,7 @@
         MinHeight="600" MinWidth="800"
         Height="600" Width="800" WindowStartupLocation="CenterScreen"
         Background="#FFFFFF">
-        <!--Colours references: CoolSky on UIGradients.com--> 
+        
     <Window.Resources>
         <vm:GameOfLifeVM x:Key="vm"/>
         <!--<Style>
@@ -22,11 +22,13 @@
     <StackPanel DataContext="{StaticResource vm}" Margin="10">
         <Button Name="evolveButton" Content="Evolve" Margin="2"/>
         <Button Name="resetButton" Content="Reset" Margin="2"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
+        <Label Content="Left Click on the cell you want to bring to life, then push the Evolve Button!" 
+               HorizontalAlignment="Center"/>
+        <ItemsControl Name="Universe" ItemsSource="{Binding GameOfLifeWorld.GridCells, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate/>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
