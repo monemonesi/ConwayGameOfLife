@@ -12,21 +12,14 @@
         Background="#FFFFFF">
         <!--Colours references: CoolSky on UIGradients.com--> 
     <Window.Resources>
-        <vm:GameOfLifeViewModel x:Key="vm"/>
+        <vm:GameOfLifeVM x:Key="vm"/>
         <!--<Style>
             
         </Style>-->
     </Window.Resources>
-    
-    <!--<Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-    </Grid>-->
-    <StackPanel Margin="10">
+
+
+    <StackPanel DataContext="{StaticResource vm}" Margin="10">
         <Button Name="evolveButton" Content="Evolve" Margin="2"/>
         <Button Name="resetButton" Content="Reset" Margin="2"/>
         <Grid>
@@ -42,9 +35,15 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Column="0">
                 <Label Content="Universe Size: "/>
-                <TextBox Name="numberOfRows" Width="30"/>
+                <TextBox Name="numberOfRows"
+                         Text="{Binding GameOfLifeWorld.TotalRows, Mode=TwoWay,
+                                UpdateSourceTrigger=LostFocus}"
+                         Width="30"/>
                 <Label Content=" x "/>
-                <TextBox Name="numberOfColumns" Width="30"/>
+                <TextBox Name="numberOfColumns" 
+                         Text="{Binding GameOfLifeWorld.TotalColumns, Mode=TwoWay,
+                                UpdateSourceTrigger=LostFocus}"
+                         Width="30"/>
             </StackPanel>
             <Label Name="generationNumLabel" Grid.Column="1"
                    HorizontalAlignment="Center"

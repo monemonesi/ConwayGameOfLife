@@ -9,47 +9,112 @@ namespace ConwayGameOfLife.Model
 {
     public class GameOfLifeWorld : ObservableBase
     {
-        private ObservableCollection<Cell> _gridCells;
-        public int Rows { get; set; }
-        public int Columns { get; set; }
+        
 
+        private ObservableCollection<Cell> _gridCells;
+        private bool _isGameRunning;
 
         public ObservableCollection<Cell> GridCells
         {
             get { return _gridCells; }
-            set { _gridCells = value; }
+            private set { _gridCells = value; }
+        }
+        public int TotalRows { get; set; }
+        public int TotalColumns { get; set; }
+
+        
+
+        public Dictionary<int, IList<int>> NeighboursId { get; set; }
+
+        public bool IsGameRunning
+        {
+            get { return _isGameRunning; }
+            set
+            {
+                _isGameRunning = value;
+                OnNotifyPropertyChanged();
+            }
         }
 
 
+        #region Constructur
         public GameOfLifeWorld(int numberOfRows, int numberOfCols)
         {
-            Rows = numberOfRows;
-            Columns = numberOfCols;
-            InitialiseGameOfLifeWorld();
-        }
+            TotalRows = numberOfRows;
+            TotalColumns = numberOfCols;
 
+            GridCells = new ObservableCollection<Cell>();
+            NeighboursId = new Dictionary<int, IList<int>>();
+
+            InitialiseGameOfLifeWorld();
+
+            //DefineCellsNeighbours();
+        }
+        #endregion
+
+        #region methods
         private void InitialiseGameOfLifeWorld()
         {
-            GridCells = new ObservableCollection<Cell>();
             int index = 0;
-            for (int row = 0; row < Rows; row++)
+            for (int row = 0; row < TotalRows; row++)
             {
-                for (int col = 0; col < Columns; col++)
+                for (int col = 0; col < TotalColumns; col++)
                 {
-                    GridCells.Add(new Cell(index));
+                    GridCells.Add(new Cell(row, col, index));
                     index++;
                 }
             }
         }
 
+        private void DefineCellsNeighbours()
+        {
+
+            for (int idCell = 0; idCell < GridCells.Count; idCell++)
+            {
+                Cell cellToCheck = new Cell(GridCells[idCell]);
+                IList<int> neighboursCellIds = new List<int>();
+
+                int cellRow = cellToCheck.RowIndex;
+                int cellCol = cellToCheck.ColumnIndex;
+
+                for (int j = -1; j < 1; j++)
+                {
+                    for (int k = -1; k < 1; k++)
+                    {
+                        if (j == 0 && k == 0)
+                            return; // do not consider the same cell
+
+                        int rowToExplore = cellRow + j;
+                        int colToExplore = cellCol + j;
+
+                        //Cell neighbour = new Cell(this.GetCellByLocation(rowToExplore, colToExplore));
+
+                        //if( neighbour != null)
+                        //{
+                        //    neighboursCellIds.Add(neighbour.IndexCell);
+                        //}
+                        
+                    }
+                }
+
+                NeighboursId.Add(idCell, neighboursCellIds);
+            }//END forEachCell
+        }
+
         public Cell GetCellByLocation(int findRow, int findCol)
         {
-            if (findRow >= Rows || findRow < 0)
+            if (findRow >= TotalRows || findRow < 0)
                 return null;
-            if (findCol >= Columns || findCol < 0)
+            if (findCol >= TotalColumns || findCol < 0)
                 return null;
-            int indexCell = findRow * Columns + findCol;
+            int indexCell = findRow * TotalColumns + findCol;
             return GridCells[indexCell];
         }
+
+        public IList<int> GetNeighboursOfCell(int idCell)
+        {
+            return NeighboursId[idCell];
+        }
+        #endregion
     }
 }

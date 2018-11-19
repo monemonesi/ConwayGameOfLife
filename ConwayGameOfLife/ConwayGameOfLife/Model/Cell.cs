@@ -19,41 +19,52 @@ namespace ConwayGameOfLife.Model
                 OnNotifyPropertyChanged();
             }
         }
-        public int Row { get; set; }
-        public int Column { get; set; }
+        public int RowIndex { get; set; }
+        public int ColumnIndex { get; set; }
         public int IndexCell { get; set; }
-        public List<int> Neighbours { get; set; }
+        //public List<int> NeighBoursIndex { get; set; }
 
 
         #region Constructors
         public Cell(int _row, int _col)
         {
-            Row = _row;
-            Column = _col;
+            RowIndex = _row;
+            ColumnIndex = _col;
             CurrentCellState = CellState.Dead;
         }
 
-        public Cell(int _row, int _col,CellState _cellState)
+        public Cell(int _row, int _col, CellState _cellState)
         {
-            Row = _row;
-            Column = _col;
+            RowIndex = _row;
+            ColumnIndex = _col;
             CurrentCellState = _cellState;
         }
 
-        public Cell(int idCell)
+        public Cell(int _row, int _col,int idCell)
         {
+            RowIndex = _row;
+            ColumnIndex = _col;
             IndexCell =idCell;
             CurrentCellState = CellState.Dead;
         }
 
-        public Cell(int idCell, CellState cellState)
+        //public Cell(int idCell, CellState cellState)
+        //{
+        //    IndexCell = idCell;
+        //    CurrentCellState = cellState;
+        //}
+
+        public Cell(Cell cellToCopy)
         {
-            IndexCell = idCell;
-            CurrentCellState = cellState;
+            IndexCell = cellToCopy.IndexCell;
+            CurrentCellState = cellToCopy.CurrentCellState;
+            RowIndex = cellToCopy.RowIndex;
+            ColumnIndex = cellToCopy.ColumnIndex;
+            //NeighBoursIndex = cellToCopy.NeighBoursIndex;
         }
         #endregion
 
-        
+
 
     }
 }
