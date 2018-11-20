@@ -114,5 +114,24 @@ namespace ConwayGameOfLife.Tests
 
             Assert.AreEqual(expectedNeighbours, neighboursId);
         }
+
+        [TestCase(0, new CellState[] {CellState.Dead, CellState.Dead, CellState.Dead })]
+        public void GetNeighboursState_ShouldReturnTheCorrectStateOfNeighbours
+            (int idCell, CellState[] expectedNeighboursState)
+        {
+            IList<CellState> neighboursState = new List<CellState>();
+            neighboursState = simpleUniverse.GetNeighboursState(idCell);
+
+            Assert.AreEqual(expectedNeighboursState, neighboursState);
+        }
+
+        [TestCase(0,0)]
+        public void GetLivingNeighbours_ShouldReturnZeroWheTheGameStarts
+            (int idCell, int expectedAliveNeighbours)
+        {
+            int AliveNeighbours = simpleUniverse.GetAliveNeighbours(idCell);
+
+            Assert.AreEqual(expectedAliveNeighbours, AliveNeighbours);
+        }
     }
 }

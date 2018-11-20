@@ -57,6 +57,7 @@ namespace ConwayGameOfLife.Model
         #endregion
 
         #region methods
+
         private void InitialiseGameOfLifeWorld()
         {
             int index = 0;
@@ -106,41 +107,6 @@ namespace ConwayGameOfLife.Model
             return true;
         }
 
-        //private void DefineCellsNeighbours()
-        //{
-
-        //    for (int idCell = 0; idCell < GridCells.Count; idCell++)
-        //    {
-        //        Cell cellToCheck = new Cell(GridCells[idCell]);
-        //        IList<int> neighboursCellIds = new List<int>();
-
-        //        int cellRow = cellToCheck.RowIndex;
-        //        int cellCol = cellToCheck.ColumnIndex;
-
-        //        for (int j = -1; j < 1; j++)
-        //        {
-        //            for (int k = -1; k < 1; k++)
-        //            {
-        //                if (j == 0 && k == 0)
-        //                    return; // do not consider the same cell
-
-        //                int rowToExplore = cellRow + j;
-        //                int colToExplore = cellCol + j;
-
-        //                //Cell neighbour = new Cell(this.GetCellByLocation(rowToExplore, colToExplore));
-
-        //                //if( neighbour != null)
-        //                //{
-        //                //    neighboursCellIds.Add(neighbour.IndexCell);
-        //                //}
-
-        //            }
-        //        }
-
-        //        NeighboursId.Add(idCell, neighboursCellIds);
-        //    }//END forEachCell
-        //}
-
         public Cell GetCellByLocation(int findRow, int findCol)
         {
             if (findRow >= TotalRows || findRow < 0)
@@ -154,10 +120,45 @@ namespace ConwayGameOfLife.Model
         public IList<Cell> GetNeighboursOfCell(int idCell)
         {
             IList<Cell> associatedNeighbours = new List<Cell>();
-            bool test = Neighbours.TryGetValue(idCell, out associatedNeighbours);
-
-            return associatedNeighbours;
+            if (Neighbours.TryGetValue(idCell, out associatedNeighbours))
+            {
+                return associatedNeighbours;
+            }
+            return null;
         }
+
+        public IList<CellState> GetNeighboursState(int idCell)
+        {
+            IList<CellState> neighboursState = new List<CellState>();
+            IList<Cell> associatedNeighbours = new List<Cell>();
+            associatedNeighbours = GetNeighboursOfCell(idCell);
+
+            foreach (Cell neighbour in associatedNeighbours)
+            {
+                neighboursState.Add(neighbour.CurrentCellState);
+            }
+
+            return neighboursState;
+        }
+
+        public int GetAliveNeighbours(int idCell)
+        {
+            int aliveNeighbours = 0;
+
+            IList<Cell> associatedNeighbours = new List<Cell>();
+            associatedNeighbours = GetNeighboursOfCell(idCell);
+
+            foreach (Cell neighbour in associatedNeighbours)
+            {
+                bool isAlive = (neighbour.CurrentCellState == CellState.Alive);
+                if (isAlive)
+                {
+                    aliveNeighbours++;
+                }
+            }
+            return aliveNeighbours;
+        }
+
         #endregion
     }
 }
