@@ -16,8 +16,7 @@
     </Window.Resources>
 
 
-    <!--<StackPanel DataContext="{StaticResource vm}" Margin="10">-->
-        <Grid DataContext="{StaticResource vm}" Margin="10">
+    <Grid DataContext="{StaticResource vm}" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -50,24 +49,6 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--<StackPanel Orientation="Horizontal" Grid.Column="0">
-                <Label Content="Universe Size: "/>
-                <TextBox Name="numberOfRows"
-                         Text="{Binding GameOfLifeWorld.TotalRows, Mode=TwoWay,
-                                UpdateSourceTrigger=PropertyChanged}"
-                         Width="30"/>
-                <Label Content=" x "/>
-                <TextBox Name="numberOfColumns" 
-                         Text="{Binding GameOfLifeWorld.TotalColumns, Mode=TwoWay,
-                                UpdateSourceTrigger=PropertyChanged}"
-                         Width="30"/>
-            </StackPanel>-->
-            <!--<Label Name="generationNumLabel" Grid.Column="1"
-                   HorizontalAlignment="Center"
-                   Content=" Generation # : ####"/>
-            <Label Name="linkToWikiRef" Grid.Column="2"
-                   HorizontalAlignment="Right"
-                   Content="wiki@vmvvns.mvavnv"/>-->
             <TextBlock Name="UniverseInfo" Grid.Column="0"
                    HorizontalAlignment="Left">
                 <Run Text="Universe size = "/>

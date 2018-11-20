@@ -60,7 +60,6 @@
     <Compile Include="Model\GameOfLifeWorld.cs" />
     <Compile Include="Model\LifeRules.cs" />
     <Compile Include="Model\ObservableBase.cs" />
-    <Compile Include="Model\Universe.cs" />
     <Compile Include="ViewModel\Commands\RelayCommand.cs" />
     <Compile Include="ViewModel\GameOfLifeVM.cs" />
     <Compile Include="View\GameOfLifeView.xaml.cs">
