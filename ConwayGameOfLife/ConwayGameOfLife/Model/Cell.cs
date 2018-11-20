@@ -33,34 +33,22 @@ namespace ConwayGameOfLife.Model
             CurrentCellState = CellState.Dead;
         }
 
-        public Cell(int _row, int _col, CellState _cellState)
+        public Cell(int _row, int _col, int idCell, CellState _cellState)
         {
             RowIndex = _row;
             ColumnIndex = _col;
+            IndexCell = idCell;
             CurrentCellState = _cellState;
         }
 
-        public Cell(int _row, int _col,int idCell)
+        public Cell(int _row, int _col, int idCell)
+            : this(_row, _col, idCell, CellState.Dead)
         {
-            RowIndex = _row;
-            ColumnIndex = _col;
-            IndexCell =idCell;
-            CurrentCellState = CellState.Dead;
         }
 
-        //public Cell(int idCell, CellState cellState)
-        //{
-        //    IndexCell = idCell;
-        //    CurrentCellState = cellState;
-        //}
-
-        public Cell(Cell cellToCopy)
+        public Cell(Cell cellToCopy) :
+            this(cellToCopy.RowIndex, cellToCopy.ColumnIndex,cellToCopy.IndexCell, cellToCopy._currentCellState)
         {
-            IndexCell = cellToCopy.IndexCell;
-            CurrentCellState = cellToCopy.CurrentCellState;
-            RowIndex = cellToCopy.RowIndex;
-            ColumnIndex = cellToCopy.ColumnIndex;
-            //NeighBoursIndex = cellToCopy.NeighBoursIndex;
         }
         #endregion
 

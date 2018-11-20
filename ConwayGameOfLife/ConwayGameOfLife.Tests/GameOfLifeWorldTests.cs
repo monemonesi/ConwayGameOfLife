@@ -51,12 +51,12 @@ namespace ConwayGameOfLife.Tests
         }
 
         [TestCase(1, 1, 6)]
-        [TestCase(2,2,12)]
-        [TestCase(0,0,0)]
-        [TestCase(3,4,19)]
+        [TestCase(2, 2, 12)]
+        [TestCase(0, 0, 0)]
+        [TestCase(3, 4, 19)]
         public void Simple_GetCellByLocation_ShouldReturnCorrectCell(int row, int col, int expectedIndex)
         {
-            
+
 
             Cell cell = simpleUniverse.GetCellByLocation(row, col);
 
@@ -66,7 +66,7 @@ namespace ConwayGameOfLife.Tests
         [TestCase(-1, 11)]
         [TestCase(-1, -1)]
         [TestCase(11, 11)]
-        [TestCase(10,10)]
+        [TestCase(10, 10)]
         public void GetCellByLocation_ShouldReturnNullWhenOutOfRange(int indexOutOfRangeR, int indexOutOfRangeC)
         {
 
@@ -80,13 +80,39 @@ namespace ConwayGameOfLife.Tests
         //[Test]
         //public void GetNeighboursIndex_ShouldAssignTheCorrectNeighours()
         //{
-        //    IList<int> neighbours = new List<int>();
+        //    IList<Cell> neighbours = new List<Cell>();
         //    neighbours = simpleUniverse.GetNeighboursOfCell(6);
 
-        //    List<int> expectedNeighbours = new List<int>() { 0,1,2,5,7,10,11,12 };
+        //    IList<int> neighboursId = new List<int>();
+        //    foreach (Cell cell in neighbours)
+        //    {
+        //        neighboursId.Add(cell.IndexCell);
+        //    }
 
-        //    Assert.AreEqual(expectedNeighbours, neighbours);
+        //    IList<int> expectedNeighbours = new List<int>() { 0, 1, 2, 5, 7, 10, 11, 12 };
+
+        //    Assert.AreEqual(expectedNeighbours, neighboursId);
         //}
 
+        [TestCase(0, new int[] {1,5,6})]
+        [TestCase(4, new int[] {3,8,9})]
+        [TestCase(15, new int[] {10,11,16 })]
+        [TestCase(19, new int[] { 13,14,18})]
+        [TestCase(6, new int[] { 0, 1, 2, 5, 7, 10, 11, 12 })]
+
+        public void GetNeighboursIndex_ShouldAssignCorrectNeighbours
+            (int idCell, int[] expectedNeighbours)
+        {
+            IList<Cell> neighbours = new List<Cell>();
+            neighbours = simpleUniverse.GetNeighboursOfCell(idCell);
+
+            IList<int> neighboursId = new List<int>();
+            foreach (Cell cell in neighbours)
+            {
+                neighboursId.Add(cell.IndexCell);
+            }
+
+            Assert.AreEqual(expectedNeighbours, neighboursId);
+        }
     }
 }

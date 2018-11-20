@@ -21,34 +21,12 @@ namespace ConwayGameOfLife.Model
         }
         public int TotalRows { get; set; }
         public int TotalColumns { get; set; }
-        //private int _totalRows;
 
-        //public int TotalRows
-        //{
-        //    get { return _totalRows; }
-        //    set
-        //    {
-        //        _totalRows = value;
-        //        OnNotifyPropertyChanged();
-        //    }
-        //}
-
-        //private int _totalColumns;
-
-        //public int TotalColumns
-        //{
-        //    get { return _totalColumns; }
-        //    set
-        //    {
-        //        _totalColumns = value;
-        //        OnNotifyPropertyChanged();
-        //    }
-        //}
+        //public Dictionary<int, IList<int>> NeighboursId { get; set; }
+        public Dictionary<int,IList<Cell>> Neighbours { get; set; }
 
 
 
-
-        public Dictionary<int, IList<int>> NeighboursId { get; set; }
 
         public bool IsGameRunning
         {
@@ -68,11 +46,13 @@ namespace ConwayGameOfLife.Model
             TotalColumns = numberOfCols;
 
             GridCells = new ObservableCollection<Cell>();
-            NeighboursId = new Dictionary<int, IList<int>>();
+
+            Neighbours = new Dictionary<int, IList<Cell>>();
 
             InitialiseGameOfLifeWorld();
 
-            //DefineCellsNeighbours();
+
+            DefineCellsNeighbours();
         }
         #endregion
 
@@ -92,38 +72,74 @@ namespace ConwayGameOfLife.Model
 
         private void DefineCellsNeighbours()
         {
-
-            for (int idCell = 0; idCell < GridCells.Count; idCell++)
+            foreach (Cell cell in GridCells)
             {
-                Cell cellToCheck = new Cell(GridCells[idCell]);
-                IList<int> neighboursCellIds = new List<int>();
+                int cellRow = cell.RowIndex;
+                int cellCol = cell.ColumnIndex;
+                int CellId = cell.IndexCell;
 
-                int cellRow = cellToCheck.RowIndex;
-                int cellCol = cellToCheck.ColumnIndex;
+                IList<Cell> cellNeighbours = new List<Cell>();
 
-                for (int j = -1; j < 1; j++)
+                for (int i = -1; i <= 1; i++)
                 {
-                    for (int k = -1; k < 1; k++)
+                    for (int j = -1; j <= 1; j++)
                     {
-                        if (j == 0 && k == 0)
-                            return; // do not consider the same cell
-
-                        int rowToExplore = cellRow + j;
-                        int colToExplore = cellCol + j;
-
-                        //Cell neighbour = new Cell(this.GetCellByLocation(rowToExplore, colToExplore));
-
-                        //if( neighbour != null)
-                        //{
-                        //    neighboursCellIds.Add(neighbour.IndexCell);
-                        //}
-                        
+                        Cell possibleNeighbour = GetCellByLocation(cellRow + i, cellCol + j);
+                        bool isValidNeighbour = CheckTheNeighbour(possibleNeighbour, i , j);
+                        if (isValidNeighbour)
+                        {
+                            cellNeighbours.Add(possibleNeighbour);
+                        }
                     }
                 }
-
-                NeighboursId.Add(idCell, neighboursCellIds);
-            }//END forEachCell
+                Neighbours.Add(CellId, cellNeighbours);
+            }
         }
+
+        private bool CheckTheNeighbour(Cell possibleNeighbour, int relativeRow, int relativeCol)
+        {
+            if (possibleNeighbour == null) // out of the universe
+                return false;
+            if (relativeRow == 0 && relativeCol == 0)//possible neighbour is my cell
+                return false;
+
+            return true;
+        }
+
+        //private void DefineCellsNeighbours()
+        //{
+
+        //    for (int idCell = 0; idCell < GridCells.Count; idCell++)
+        //    {
+        //        Cell cellToCheck = new Cell(GridCells[idCell]);
+        //        IList<int> neighboursCellIds = new List<int>();
+
+        //        int cellRow = cellToCheck.RowIndex;
+        //        int cellCol = cellToCheck.ColumnIndex;
+
+        //        for (int j = -1; j < 1; j++)
+        //        {
+        //            for (int k = -1; k < 1; k++)
+        //            {
+        //                if (j == 0 && k == 0)
+        //                    return; // do not consider the same cell
+
+        //                int rowToExplore = cellRow + j;
+        //                int colToExplore = cellCol + j;
+
+        //                //Cell neighbour = new Cell(this.GetCellByLocation(rowToExplore, colToExplore));
+
+        //                //if( neighbour != null)
+        //                //{
+        //                //    neighboursCellIds.Add(neighbour.IndexCell);
+        //                //}
+
+        //            }
+        //        }
+
+        //        NeighboursId.Add(idCell, neighboursCellIds);
+        //    }//END forEachCell
+        //}
 
         public Cell GetCellByLocation(int findRow, int findCol)
         {
@@ -135,9 +151,12 @@ namespace ConwayGameOfLife.Model
             return GridCells[indexCell];
         }
 
-        public IList<int> GetNeighboursOfCell(int idCell)
+        public IList<Cell> GetNeighboursOfCell(int idCell)
         {
-            return NeighboursId[idCell];
+            IList<Cell> associatedNeighbours = new List<Cell>();
+            bool test = Neighbours.TryGetValue(idCell, out associatedNeighbours);
+
+            return associatedNeighbours;
         }
         #endregion
     }
