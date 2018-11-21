@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ConwayGameOfLife.Model
 {
@@ -14,19 +15,16 @@ namespace ConwayGameOfLife.Model
         private ObservableCollection<Cell> _gridCells;
         private bool _isGameRunning;
 
+        public int TotalRows { get; set; }
+        public int TotalColumns { get; set; }
+
+        public Dictionary<int,IList<Cell>> Neighbours { get; set; }
+
         public ObservableCollection<Cell> GridCells
         {
             get { return _gridCells; }
             private set { _gridCells = value; }
         }
-        public int TotalRows { get; set; }
-        public int TotalColumns { get; set; }
-
-        //public Dictionary<int, IList<int>> NeighboursId { get; set; }
-        public Dictionary<int,IList<Cell>> Neighbours { get; set; }
-
-
-
 
         public bool IsGameRunning
         {
@@ -50,8 +48,6 @@ namespace ConwayGameOfLife.Model
             Neighbours = new Dictionary<int, IList<Cell>>();
 
             InitialiseGameOfLifeWorld();
-
-
             DefineCellsNeighbours();
         }
         #endregion
@@ -157,6 +153,31 @@ namespace ConwayGameOfLife.Model
                 }
             }
             return aliveNeighbours;
+        }
+
+        public void ToggleCellState(Point point, double gridWidthPixels, double gridHeightPixels)
+        {
+            bool isInGrid = gridWidthPixels > 0 && gridHeightPixels > 0;
+            bool canToggle = (point != null && IsGameRunning == false && isInGrid);
+
+            if (canToggle)
+            {
+                //find the cell to toggle
+                int colLoc = (int)(point.X / gridWidthPixels) * TotalColumns;
+                int rowLoc = (int)(point.Y / gridHeightPixels) * TotalRows;
+
+                Cell cellToToggle = GetCellByLocation(rowLoc, colLoc);
+
+                if(cellToToggle != null)
+                {
+                    if (cellToToggle.CurrentCellState == CellState.Dead)
+                        cellToToggle.CurrentCellState = CellState.Alive;
+                    else if (cellToToggle.CurrentCellState == CellState.Alive)
+                        cellToToggle.CurrentCellState = CellState.Dead;
+                }
+            
+            }
+
         }
 
         #endregion

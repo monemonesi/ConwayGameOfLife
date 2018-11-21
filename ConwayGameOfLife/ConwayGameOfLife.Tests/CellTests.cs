@@ -11,15 +11,6 @@ namespace ConwayGameOfLife.Tests
     [TestFixture]
     public class CellTests
     {
-        [TestCase(1,1)]
-        public void CreateDeadCell(int row,int col)
-        {
-            Cell cell = new Cell(row, col);
-
-            CellState currentState = cell.CurrentCellState;
-
-            Assert.AreEqual(CellState.Dead, currentState);
-        }
 
         [TestCase(1, 1,3, CellState.Alive)]
         public void CreateCellWithSpecificCellState(int row, int col, int index, CellState cellState)
@@ -39,20 +30,5 @@ namespace ConwayGameOfLife.Tests
 
             Assert.AreEqual(CellState.Dead, currentState);
         }
-
-        //[TestCase(1, CellState.Alive)]
-        //[TestCase(1, CellState.Dead)]
-        //[TestCase(0, CellState.Alive)]
-        //[TestCase(0, CellState.Dead)]
-        //public void CreateCellWithSpecificCellStateFromIndex(int indexCell, CellState cellState)
-        //{
-        //    Cell cell = new Cell(indexCell, cellState);
-
-        //    CellState currentState = cell.CurrentCellState;
-
-        //    Assert.AreEqual(cellState, currentState);
-        //}
-
-
     }
 }

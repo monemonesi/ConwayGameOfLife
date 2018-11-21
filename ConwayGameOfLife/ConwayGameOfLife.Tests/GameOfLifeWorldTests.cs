@@ -36,7 +36,6 @@ namespace ConwayGameOfLife.Tests
             Assert.AreEqual(expectedSize, universeSize);
         }
 
-
         [TestCase(0, 9, 9)]
         [TestCase(0, 0, 0)]
         [TestCase(9, 9, 99)]
@@ -75,31 +74,11 @@ namespace ConwayGameOfLife.Tests
             Assert.IsNull(cellToFind);
         }
 
-
-
-        //[Test]
-        //public void GetNeighboursIndex_ShouldAssignTheCorrectNeighours()
-        //{
-        //    IList<Cell> neighbours = new List<Cell>();
-        //    neighbours = simpleUniverse.GetNeighboursOfCell(6);
-
-        //    IList<int> neighboursId = new List<int>();
-        //    foreach (Cell cell in neighbours)
-        //    {
-        //        neighboursId.Add(cell.IndexCell);
-        //    }
-
-        //    IList<int> expectedNeighbours = new List<int>() { 0, 1, 2, 5, 7, 10, 11, 12 };
-
-        //    Assert.AreEqual(expectedNeighbours, neighboursId);
-        //}
-
         [TestCase(0, new int[] {1,5,6})]
         [TestCase(4, new int[] {3,8,9})]
         [TestCase(15, new int[] {10,11,16 })]
         [TestCase(19, new int[] { 13,14,18})]
         [TestCase(6, new int[] { 0, 1, 2, 5, 7, 10, 11, 12 })]
-
         public void GetNeighboursIndex_ShouldAssignCorrectNeighbours
             (int idCell, int[] expectedNeighbours)
         {
@@ -133,5 +112,7 @@ namespace ConwayGameOfLife.Tests
 
             Assert.AreEqual(expectedAliveNeighbours, AliveNeighbours);
         }
+
+
     }
 }

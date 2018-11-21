@@ -21,15 +21,18 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <Button Name="evolveButton" Content="Evolve" Margin="2" Grid.Row="0"/>
-        <Button Name="resetButton" Content="Reset" Margin="2" Grid.Row="1"/>
+        <Button Name="stopButton" Content="Stop" Margin="2" Grid.Row="1"/>
+        <Button Name="resetButton" Content="Reset" Margin="2" Grid.Row="2"/>
         <Label Content="Left Click on the cell you want to bring to life, then push the Evolve Button!" 
-               HorizontalAlignment="Center" Grid.Row="2"/>
-        <ItemsControl Name="Universe" ItemsSource="{Binding GameOfLifeWorld.GridCells, Mode=OneWay}" Grid.Row="3">
+               HorizontalAlignment="Center" Grid.Row="3"/>
+        <ItemsControl Name="Universe" ItemsSource="{Binding GameOfLifeWorld.GridCells, Mode=OneWay}" 
+                      Grid.Row="4">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="{Binding GameOfLifeWorld.TotalColumns, Mode=TwoWay}"
@@ -39,11 +42,12 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Rectangle Style="{StaticResource cellStyleDead}"/>
+                    <!--<Rectangle Style="{Binding Source={StaticResource }}"-->
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Grid Grid.Row="4" Margin="0 5 0 5">
+        <Grid Grid.Row="5" Margin="0 5 0 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>

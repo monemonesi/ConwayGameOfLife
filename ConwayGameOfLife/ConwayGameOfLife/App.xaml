@@ -9,13 +9,28 @@
             <Setter Property="Margin" Value="1"/>
             <Setter Property="Stroke" Value="Blue"/>
             <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="Fill" Value="Azure"/>
+            <Setter Property="Fill" Value="LightBlue"/>
         </Style>
         <Style  TargetType="Rectangle" x:Key="cellStyleDead">
             <Setter Property="Margin" Value="1"/>
             <Setter Property="Stroke" Value="DarkGray"/>
             <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="Fill" Value="Gray"/>
+            <Setter Property="Fill" Value="LightGray"/>
         </Style>
+
+        <!--<Style TargetType="Rectangle" x:Key="cellStyle">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CellState}" Value="Alive">
+                    <Setter Property="Stroke" Value="Blue"/>
+                    <Setter Property="Fill" Value="Azure"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CellState}" Value="Dead">
+                    <Setter Property="Stroke" Value="DarkGray"/>
+                    <Setter Property="Fill" Value="LightGray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>-->
     </Application.Resources>
 </Application>

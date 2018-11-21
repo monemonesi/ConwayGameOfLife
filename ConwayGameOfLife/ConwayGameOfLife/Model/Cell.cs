@@ -22,17 +22,8 @@ namespace ConwayGameOfLife.Model
         public int RowIndex { get; set; }
         public int ColumnIndex { get; set; }
         public int IndexCell { get; set; }
-        //public List<int> NeighBoursIndex { get; set; }
-
 
         #region Constructors
-        public Cell(int _row, int _col)
-        {
-            RowIndex = _row;
-            ColumnIndex = _col;
-            CurrentCellState = CellState.Dead;
-        }
-
         public Cell(int _row, int _col, int idCell, CellState _cellState)
         {
             RowIndex = _row;
