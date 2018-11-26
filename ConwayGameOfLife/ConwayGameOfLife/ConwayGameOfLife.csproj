@@ -60,7 +60,9 @@
     <Compile Include="Model\GameOfLifeWorld.cs" />
     <Compile Include="Model\LifeRules.cs" />
     <Compile Include="Model\ObservableBase.cs" />
+    <Compile Include="ViewModel\Commands\DelegateCommand.cs" />
     <Compile Include="ViewModel\Commands\RelayCommand.cs" />
+    <Compile Include="ViewModel\Converters\CellStateToColorConverter.cs" />
     <Compile Include="ViewModel\GameOfLifeVM.cs" />
     <Compile Include="View\GameOfLifeView.xaml.cs">
       <DependentUpon>GameOfLifeView.xaml</DependentUpon>

@@ -17,20 +17,21 @@
             <Setter Property="StrokeThickness" Value="1"/>
             <Setter Property="Fill" Value="LightGray"/>
         </Style>
-
-        <!--<Style TargetType="Rectangle" x:Key="cellStyle">
-            <Setter Property="Margin" Value="1"/>
+        
+        <Style TargetType="Rectangle" x:Key="cellStyle">
+            <!--<Setter Property="Margin" Value="1"/>-->
             <Setter Property="StrokeThickness" Value="1"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding CellState}" Value="Alive">
+                <DataTrigger Binding="{Binding CurrentCellState}" Value="Alive">
                     <Setter Property="Stroke" Value="Blue"/>
                     <Setter Property="Fill" Value="Azure"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding CellState}" Value="Dead">
+                <DataTrigger Binding="{Binding CurrentCellState}" Value="Dead">
                     <Setter Property="Stroke" Value="DarkGray"/>
                     <Setter Property="Fill" Value="LightGray"/>
                 </DataTrigger>
             </Style.Triggers>
-        </Style>-->
+        </Style>
+            
     </Application.Resources>
 </Application>

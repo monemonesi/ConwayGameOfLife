@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfMVVMSample.ViewModel.Commands
+namespace ConwayGameOfLife.ViewModel.Commands
 {
-    class RelayCommand : ICommand
+    public class RelayCommand : ICommand
     {
         #region Fields 
         readonly Action<object> _execute;
@@ -21,6 +21,7 @@ namespace WpfMVVMSample.ViewModel.Commands
             _execute = execute ?? throw new ArgumentNullException("execute");
             _canExecute = canExecute;
         }
+
         #endregion // Constructors 
 
         #region ICommand Members 
@@ -28,12 +29,23 @@ namespace WpfMVVMSample.ViewModel.Commands
         {
             return _canExecute == null ? true : _canExecute(parameter);
         }
-        public event EventHandler CanExecuteChanged
+
+        public event EventHandler CanExecuteChanged;
+        //public event EventHandler CanExecuteChanged
+        //{
+        //    add { CommandManager.RequerySuggested += value; }
+        //    remove { CommandManager.RequerySuggested -= value; }
+        //}
+        public void Execute(object parameter)
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            _execute(parameter);
         }
-        public void Execute(object parameter) { _execute(parameter); }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+
+        }
         #endregion // ICommand Members 
     }
 }

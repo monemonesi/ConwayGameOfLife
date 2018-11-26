@@ -10,7 +10,6 @@ namespace ConwayGameOfLife.Model
 {
     public class GameOfLifeWorld : ObservableBase
     {
-        
 
         private ObservableCollection<Cell> _gridCells;
         private bool _isGameRunning;
@@ -61,9 +60,50 @@ namespace ConwayGameOfLife.Model
             {
                 for (int col = 0; col < TotalColumns; col++)
                 {
-                    GridCells.Add(new Cell(row, col, index));
+                    if (index % 5 == 0)
+                    {
+                        GridCells.Add(new Cell(row, col, index, CellState.Alive));
+                    }
+                    else
+                    {
+                        GridCells.Add(new Cell(row, col, index));
+                    }
+                    
                     index++;
                 }
+            }
+        }
+
+        internal void ResetGame()
+        {
+            StopGame();
+            //PlaceHOlderBehaviour//////////////////////////////////
+            foreach (var cell in GridCells)
+            {
+                cell.CurrentCellState = CellState.Dead;
+            }
+            //////////////////////////////////////////////////////
+        }
+
+        internal void StopGame()
+        {
+            if (IsGameRunning)
+            {
+                IsGameRunning = false;
+            }
+        }
+
+        internal void StartGame()
+        {
+            if (!IsGameRunning)
+            {
+                //PlaceHOlderBehaviour//////////////////////////////////
+                foreach (var cell in GridCells)
+                {
+                    cell.CurrentCellState = CellState.Alive;
+                }
+                //////////////////////////////////////////////////////
+                IsGameRunning = true;
             }
         }
 
@@ -171,9 +211,14 @@ namespace ConwayGameOfLife.Model
                 if(cellToToggle != null)
                 {
                     if (cellToToggle.CurrentCellState == CellState.Dead)
+                    {
                         cellToToggle.CurrentCellState = CellState.Alive;
+                    }
                     else if (cellToToggle.CurrentCellState == CellState.Alive)
+                    {
                         cellToToggle.CurrentCellState = CellState.Dead;
+                    }
+                        
                 }
             
             }
