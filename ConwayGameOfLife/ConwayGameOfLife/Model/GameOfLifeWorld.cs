@@ -203,8 +203,8 @@ namespace ConwayGameOfLife.Model
             if (canToggle)
             {
                 //find the cell to toggle
-                int colLoc = (int)(point.X / gridWidthPixels) * TotalColumns;
-                int rowLoc = (int)(point.Y / gridHeightPixels) * TotalRows;
+                int colLoc = (int)((point.X / gridWidthPixels) * TotalColumns);
+                int rowLoc = (int)((point.Y / gridHeightPixels) * TotalRows);
 
                 Cell cellToToggle = GetCellByLocation(rowLoc, colLoc);
 
