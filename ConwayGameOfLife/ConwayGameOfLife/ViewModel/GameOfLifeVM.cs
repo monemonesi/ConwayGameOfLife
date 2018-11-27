@@ -16,8 +16,9 @@ namespace ConwayGameOfLife.ViewModel
 
     public class GameOfLifeVM
     {
-        private readonly int _initialTotalRows = 20;
-        private readonly int _initialTotalColumns = 20;
+        private readonly int _initialTotalRows = Constants.TOTAL_ROWS;
+        private readonly int _initialTotalColumns = Constants.TOTAL_COLUMNS;
+        
 
         public GameOfLifeWorld GameOfLifeWorld { get;}
 

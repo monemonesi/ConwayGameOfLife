@@ -13,6 +13,8 @@ namespace ConwayGameOfLife.Model
 
         private ObservableCollection<Cell> _gridCells;
         private bool _isGameRunning;
+        private int _maxGeneration;
+        private int _actualGeneration;
 
         public int TotalRows { get; set; }
         public int TotalColumns { get; set; }
@@ -35,12 +37,29 @@ namespace ConwayGameOfLife.Model
             }
         }
 
+        public int MaxGeneration
+        {
+            get { return _maxGeneration; }
+            private set { _maxGeneration = value; }
+        }
+
+        public int ActualGeneration
+        {
+            get { return _actualGeneration; }
+            set
+            {
+                _actualGeneration = value;
+                OnNotifyPropertyChanged();
+            }
+        }
 
         #region Constructur
         public GameOfLifeWorld(int numberOfRows, int numberOfCols)
         {
             TotalRows = numberOfRows;
             TotalColumns = numberOfCols;
+            ActualGeneration = 1;
+            MaxGeneration = Constants.MAX_GENERATION_NUM;
 
             GridCells = new ObservableCollection<Cell>();
 
@@ -203,12 +222,9 @@ namespace ConwayGameOfLife.Model
             if (canToggle)
             {
                 //find the cell to toggle
-                int colLoc = (int)((point.X / gridWidthPixels) * TotalColumns);
-                int rowLoc = (int)((point.Y / gridHeightPixels) * TotalRows);
+                Cell cellToToggle = GetCellFromGUI(point, gridWidthPixels, gridHeightPixels);
 
-                Cell cellToToggle = GetCellByLocation(rowLoc, colLoc);
-
-                if(cellToToggle != null)
+                if (cellToToggle != null)
                 {
                     if (cellToToggle.CurrentCellState == CellState.Dead)
                     {
@@ -218,11 +234,20 @@ namespace ConwayGameOfLife.Model
                     {
                         cellToToggle.CurrentCellState = CellState.Dead;
                     }
-                        
+
                 }
-            
+
             }
 
+        }
+
+        private Cell GetCellFromGUI(Point point, double gridWidthPixels, double gridHeightPixels)
+        {
+            int colLoc = (int)((point.X / gridWidthPixels) * TotalColumns);
+            int rowLoc = (int)((point.Y / gridHeightPixels) * TotalRows);
+
+            Cell cellToToggle = GetCellByLocation(rowLoc, colLoc);
+            return cellToToggle;
         }
 
         #endregion

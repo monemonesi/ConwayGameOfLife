@@ -65,13 +65,17 @@
             <TextBlock Name="UniverseInfo" Grid.Column="0"
                    HorizontalAlignment="Left">
                 <Run Text="Universe size = "/>
-                <Run Text="{Binding GameOfLifeWorld.TotalRows}"/>
+                <Run Text="{Binding GameOfLifeWorld.TotalRows, Mode=OneTime}"/>
                 <Run Text=" x "/>
-                <Run Text="{Binding GameOfLifeWorld.TotalColumns}"/>
+                <Run Text="{Binding GameOfLifeWorld.TotalColumns, Mode=OneTime}"/>
             </TextBlock>
             <TextBlock Name="generationNumber" Grid.Column="1"
-                       HorizontalAlignment="Center"
-                       Text="Generation # : ######"/>
+                       HorizontalAlignment="Center">
+                <Run Text="Generaion number: "/>
+                <Run Text="{Binding GameOfLifeWorld.ActualGeneration, Mode=OneWay}"/>
+                <Run Text=" of "/>
+                <Run Text="{Binding GameOfLifeWorld.MaxGeneration, Mode=OneWay}"/>
+            </TextBlock>
             <TextBlock Name="linkRef" Grid.Column="2"
                        HorizontalAlignment="Left"
                        Text="lnvfeisvnlsoe@sldvnslov.com"/>

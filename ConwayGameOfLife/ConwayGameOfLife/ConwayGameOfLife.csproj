@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\CellState.cs" />
+    <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\GameOfLifeWorld.cs" />
     <Compile Include="Model\LifeRules.cs" />
     <Compile Include="Model\ObservableBase.cs" />
