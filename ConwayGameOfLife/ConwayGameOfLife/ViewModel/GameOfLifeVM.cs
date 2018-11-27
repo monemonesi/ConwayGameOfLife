@@ -21,8 +21,7 @@ namespace ConwayGameOfLife.ViewModel
 
         public GameOfLifeWorld GameOfLifeWorld { get;}
 
-        public DelegateCommand ToggleCellStateCommand { get; set; }
-        //public DelegateCommand StartGameCommand { get; set; }
+        public RelayCommand ToggleCellStateCommand { get; set; }
         public RelayCommand StartGameCommand { get; set; }
         public RelayCommand StopGameCommand { get; set; }
         public RelayCommand ResetGameCommand { get; set; }
@@ -32,20 +31,14 @@ namespace ConwayGameOfLife.ViewModel
         {
 
             GameOfLifeWorld = new GameOfLifeWorld(_initialTotalRows, _initialTotalColumns);
-            GameOfLifeWorld.PropertyChanged += OnGameOfLifeWorldPropertyChanged;
+            //GameOfLifeWorld.PropertyChanged += OnGameOfLifeWorldPropertyChanged;
 
             //initialize Commands
-            ToggleCellStateCommand = new DelegateCommand(OnToggleCellState, CanToggleCellState);
-            //StartGameCommand = new DelegateCommand(OnStartGame, CanStartGame);
+            ToggleCellStateCommand = new RelayCommand(OnToggleCellState, canExecute => OnCanExecute());
             StartGameCommand = new RelayCommand(param => OnStartGame(), canExecute => OnCanExecute());
             ResetGameCommand = new RelayCommand(param => OnResetGame(), canExecute => true);
             StopGameCommand = new RelayCommand(param => OnStopGame(), canExecute => OnCanExecute());
         }
-
-
-
-
-
 
         #endregion
 
@@ -102,6 +95,8 @@ namespace ConwayGameOfLife.ViewModel
 
             GameOfLifeWorld.ToggleCellState(pointer, gridWidthInPixel, gridHeightInPixel);
         }
+
+
 
         private void OnGameOfLifeWorldPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
