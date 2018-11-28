@@ -11,5 +11,6 @@ namespace ConwayGameOfLife.Model
         public const int MAX_GENERATION_NUM = 100;
         public const int TOTAL_ROWS = 20;
         public const int TOTAL_COLUMNS = 30;
+        public const int INTERVAL_MILLISECONDS = 250;
     }
 }

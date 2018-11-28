@@ -108,7 +108,7 @@ namespace ConwayGameOfLife.Tests
         public void GetLivingNeighbours_ShouldReturnZeroWheTheGameStarts
             (int idCell, int expectedAliveNeighbours)
         {
-            int AliveNeighbours = simpleUniverse.GetAliveNeighbours(idCell);
+            int AliveNeighbours = simpleUniverse.GetNumberOfAliveNeighbours(idCell);
 
             Assert.AreEqual(expectedAliveNeighbours, AliveNeighbours);
         }

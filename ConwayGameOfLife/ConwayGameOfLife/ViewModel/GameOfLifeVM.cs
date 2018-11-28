@@ -18,7 +18,6 @@ namespace ConwayGameOfLife.ViewModel
     {
         private readonly int _initialTotalRows = Constants.TOTAL_ROWS;
         private readonly int _initialTotalColumns = Constants.TOTAL_COLUMNS;
-        
 
         public GameOfLifeWorld GameOfLifeWorld { get;}
 
@@ -32,7 +31,7 @@ namespace ConwayGameOfLife.ViewModel
         {
 
             GameOfLifeWorld = new GameOfLifeWorld(_initialTotalRows, _initialTotalColumns);
-            //GameOfLifeWorld.PropertyChanged += OnGameOfLifeWorldPropertyChanged;
+            GameOfLifeWorld.PropertyChanged += OnGameOfLifeWorldPropertyChanged;
 
             //initialize Commands
             ToggleCellStateCommand = new RelayCommand(OnToggleCellState, canExecute => OnCanExecute());

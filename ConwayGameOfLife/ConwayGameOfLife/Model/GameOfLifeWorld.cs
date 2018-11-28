@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -79,15 +80,7 @@ namespace ConwayGameOfLife.Model
             {
                 for (int col = 0; col < TotalColumns; col++)
                 {
-                    if (index % 5 == 0)
-                    {
-                        GridCells.Add(new Cell(row, col, index, CellState.Alive));
-                    }
-                    else
-                    {
-                        GridCells.Add(new Cell(row, col, index));
-                    }
-                    
+                    GridCells.Add(new Cell(row, col, index));
                     index++;
                 }
             }
@@ -96,35 +89,81 @@ namespace ConwayGameOfLife.Model
         internal void ResetGame()
         {
             StopGame();
-            //PlaceHOlderBehaviour//////////////////////////////////
+            ActualGeneration = 0;
             foreach (var cell in GridCells)
             {
                 cell.CurrentCellState = CellState.Dead;
             }
-            //////////////////////////////////////////////////////
+            
         }
 
         internal void StopGame()
         {
-            if (IsGameRunning)
-            {
-                IsGameRunning = false;
-            }
+            //if (IsGameRunning)
+            //{
+            //    IsGameRunning = false;
+            //}
+            IsGameRunning = false;
         }
 
         internal void StartGame()
         {
             if (!IsGameRunning)
             {
-                //PlaceHOlderBehaviour//////////////////////////////////
-                foreach (var cell in GridCells)
-                {
-                    cell.CurrentCellState = CellState.Alive;
-                }
-                //////////////////////////////////////////////////////
                 IsGameRunning = true;
+                RunGameAsync();
+                //RunGame();
+                
             }
         }
+
+        private async void RunGameAsync()
+        {
+            if (IsGameRunning)
+            {
+                while (ActualGeneration < MaxGeneration)
+                {
+                    foreach (Cell cell in GridCells)
+                    {
+                        CellState currentState = cell.CurrentCellState;
+                        int aliveNeighbours = GetNumberOfAliveNeighbours(cell.IndexCell);
+                        CellState nextState = LifeRules.GetNextState(currentState, aliveNeighbours);
+                        cell.CurrentCellState = nextState;
+
+                    }
+                    await Task.Delay(Constants.INTERVAL_MILLISECONDS);
+                    ActualGeneration++;
+                }
+
+                IsGameRunning = false;
+            }
+            
+        }
+
+        //private void RunGame()
+        //{
+        //    if (IsGameRunning)
+        //    {
+        //        while (ActualGeneration < MaxGeneration)
+        //        {
+        //            foreach (Cell cell in GridCells)
+        //            {
+        //                CellState currentState = cell.CurrentCellState;
+        //                int aliveNeighbours = GetNumberOfAliveNeighbours(cell.IndexCell);
+        //                CellState nextState = LifeRules.GetNextState(currentState, aliveNeighbours);
+        //                cell.CurrentCellState = nextState;
+
+        //            }
+        //            Thread.Sleep(10);
+        //            ActualGeneration++;
+        //        }
+
+        //        IsGameRunning = false;
+        //    }
+
+        //}
+
+        
 
         private void DefineCellsNeighbours()
         {
@@ -196,7 +235,7 @@ namespace ConwayGameOfLife.Model
             return neighboursState;
         }
 
-        public int GetAliveNeighbours(int idCell)
+        public int GetNumberOfAliveNeighbours(int idCell)
         {
             int aliveNeighbours = 0;
 
