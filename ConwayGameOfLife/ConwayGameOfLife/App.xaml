@@ -5,21 +5,7 @@
              StartupUri="View\GameOfLifeView.xaml">
     <Application.Resources>
         <!-- TODO: Update Colours references: CoolSky on UIGradients.com-->
-        <Style TargetType="Rectangle" x:Key="cellStyleAlive">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Stroke" Value="Blue"/>
-            <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="Fill" Value="LightBlue"/>
-        </Style>
-        <Style  TargetType="Rectangle" x:Key="cellStyleDead">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Stroke" Value="DarkGray"/>
-            <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="Fill" Value="LightGray"/>
-        </Style>
-        
         <Style TargetType="Rectangle" x:Key="cellStyle">
-            <!--<Setter Property="Margin" Value="1"/>-->
             <Setter Property="StrokeThickness" Value="1"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding CurrentCellState}" Value="Alive">
@@ -31,6 +17,14 @@
                     <Setter Property="Fill" Value="LightGray"/>
                 </DataTrigger>
             </Style.Triggers>
+        </Style>
+
+
+        <Style TargetType="Button" x:Key="HyperlinkButton">
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
             
     </Application.Resources>

@@ -12,5 +12,6 @@ namespace ConwayGameOfLife.Model
         public const int TOTAL_ROWS = 50;
         public const int TOTAL_COLUMNS = 50;
         public const int INTERVAL_MILLISECONDS = 250;
+        public const string GOL_WIKI_LINK = "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life";
     }
 }

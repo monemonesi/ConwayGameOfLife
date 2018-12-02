@@ -92,9 +92,14 @@
                 <Run Text=" of "/>
                 <Run Text="{Binding GameOfLifeWorld.MaxGeneration, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Name="linkRef" Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       Text="lnvfeisvnlsoe@sldvnslov.com"/>
+            <Button Grid.Column="2" Command="{Binding NavigateToWiki}"
+                    Style="{StaticResource HyperlinkButton}">
+                <TextBlock Text="Conway`s Game Of Life"
+                           TextDecorations="Underline"
+                           Foreground="DodgerBlue"
+                           FontStyle="Italic"
+                           Background="Transparent"/>
+            </Button>
 
         </Grid>
     

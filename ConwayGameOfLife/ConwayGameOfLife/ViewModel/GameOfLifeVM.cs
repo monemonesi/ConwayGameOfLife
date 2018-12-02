@@ -26,6 +26,7 @@ namespace ConwayGameOfLife.ViewModel
         public RelayCommand StopGameCommand { get; set; }
         public RelayCommand ResetGameCommand { get; set; }
         public RelayCommand NextGenCommand { get; set; }
+        public RelayCommand NavigateToWiki { get; set; }
 
         #region constructor
         public GameOfLifeVM()
@@ -40,25 +41,22 @@ namespace ConwayGameOfLife.ViewModel
             ResetGameCommand = new RelayCommand(param => OnResetGame(), canExecute => true);
             StopGameCommand = new RelayCommand(param => OnStopGame(), canExecute => true);
             NextGenCommand = new RelayCommand(param => OnNextGen(), canExecute => OnCanExecute());
+            NavigateToWiki = new RelayCommand(param => OnNavigateToWiki(), canExecute => true);
+        }
+
+        #endregion
+
+        #region methods
+
+        private void OnNavigateToWiki()
+        {
+            System.Diagnostics.Process.Start(Constants.GOL_WIKI_LINK);
         }
 
         private void OnNextGen()
         {
             GameOfLifeWorld.NextGeneration();
         }
-
-        #endregion
-
-        #region methods
-        //private bool CanStartGame(object arg)
-        //{
-        //    return GameOfLifeWorld != null && !GameOfLifeWorld.IsGameRunning;
-        //}
-
-        //private void OnStartGame(object obj)
-        //{
-        //    GameOfLifeWorld.StartGame();
-        //}
 
         private void OnStopGame()
         {
