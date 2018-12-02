@@ -25,6 +25,7 @@ namespace ConwayGameOfLife.ViewModel
         public RelayCommand StartGameCommand { get; set; }
         public RelayCommand StopGameCommand { get; set; }
         public RelayCommand ResetGameCommand { get; set; }
+        public RelayCommand NextGenCommand { get; set; }
 
         #region constructor
         public GameOfLifeVM()
@@ -37,7 +38,13 @@ namespace ConwayGameOfLife.ViewModel
             ToggleCellStateCommand = new RelayCommand(OnToggleCellState, canExecute => OnCanExecute());
             StartGameCommand = new RelayCommand(param => OnStartGame(), canExecute => OnCanExecute());
             ResetGameCommand = new RelayCommand(param => OnResetGame(), canExecute => true);
-            StopGameCommand = new RelayCommand(param => OnStopGame(), canExecute => OnCanExecute());
+            StopGameCommand = new RelayCommand(param => OnStopGame(), canExecute => true);
+            NextGenCommand = new RelayCommand(param => OnNextGen(), canExecute => OnCanExecute());
+        }
+
+        private void OnNextGen()
+        {
+            GameOfLifeWorld.NextGeneration();
         }
 
         #endregion

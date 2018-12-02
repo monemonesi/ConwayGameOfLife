@@ -69,6 +69,7 @@ namespace ConwayGameOfLife.Model
             InitialiseGameOfLifeWorld();
             DefineCellsNeighbours();
         }
+
         #endregion
 
         #region methods
@@ -99,10 +100,6 @@ namespace ConwayGameOfLife.Model
 
         internal void StopGame()
         {
-            //if (IsGameRunning)
-            //{
-            //    IsGameRunning = false;
-            //}
             IsGameRunning = false;
         }
 
@@ -112,32 +109,42 @@ namespace ConwayGameOfLife.Model
             {
                 IsGameRunning = true;
                 RunGameAsync();
-                //RunGame();
-                
+
             }
+        }
+
+        internal void NextGeneration()
+        {
+            EvaluateNextGen();
+            ActualGeneration++;
         }
 
         private async void RunGameAsync()
         {
-            if (IsGameRunning)
-            {
+            //if (IsGameRunning)
+            //{
                 while (ActualGeneration < MaxGeneration)
                 {
-                    foreach (Cell cell in GridCells)
-                    {
-                        CellState currentState = cell.CurrentCellState;
-                        int aliveNeighbours = GetNumberOfAliveNeighbours(cell.IndexCell);
-                        CellState nextState = LifeRules.GetNextState(currentState, aliveNeighbours);
-                        cell.CurrentCellState = nextState;
-
-                    }
-                    await Task.Delay(Constants.INTERVAL_MILLISECONDS);
+                    EvaluateNextGen();
                     ActualGeneration++;
+                    await Task.Delay(Constants.INTERVAL_MILLISECONDS);
+                    if (!IsGameRunning) break;
                 }
 
                 IsGameRunning = false;
-            }
+            //}
             
+        }
+
+        private void EvaluateNextGen()
+        {
+            foreach (Cell cell in GridCells)
+            {
+                CellState currentState = cell.CurrentCellState;
+                int aliveNeighbours = GetNumberOfAliveNeighbours(cell.IndexCell);
+                CellState nextState = LifeRules.GetNextState(currentState, aliveNeighbours);
+                cell.CurrentCellState = nextState;
+            }
         }
 
         //private void RunGame()
@@ -163,7 +170,7 @@ namespace ConwayGameOfLife.Model
 
         //}
 
-        
+
 
         private void DefineCellsNeighbours()
         {
