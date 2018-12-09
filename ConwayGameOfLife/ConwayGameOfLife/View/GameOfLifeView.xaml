@@ -24,31 +24,36 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Left Click on the cell you want to bring to life, then push the Evolve Button!" 
+        <Label Content="Press Populate or left Click on the cell you want to bring to life, then push the Evolve Button!" 
                HorizontalAlignment="Center" Grid.Row="0"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="evolveButton" Content="Evolve" Margin="1"
+
+            <Button Name="populateRandomButton" Content="Populate" Margin="2" 
                     Grid.Column="0"
-                    Command="{Binding StartGameCommand}"/>
-            <Button Name="nextGenButton" Content="NextGen" Margin="1" 
+                    Command="{Binding PopulateRandom}"/>
+            <Button Name="nextGenButton" Content="NextGen" Margin="2" 
                     Grid.Column="1"
                     Command="{Binding NextGenCommand}"/>
-            <Button Name="stopButton" Content="Stop" Margin="1" 
-                    Grid.Column="2"
-                    Command="{Binding StopGameCommand}"/>
-            <Button Name="resetButton" Content="Reset" Margin="1" 
+            <Button Name="evolveButton" Content="Evolve" Margin="2"
+                    Grid.Column="2" VerticalAlignment="Center"
+                    Command="{Binding StartGameCommand}"/>
+            <Button Name="stopButton" Content="Stop" Margin="2" 
                     Grid.Column="3"
+                    Command="{Binding StopGameCommand}"/>
+            <Button Name="resetButton" Content="Reset" Margin="2" 
+                    Grid.Column="4"
                     Command="{Binding ResetGameCommand}"/>
         </Grid>
 
-        <ItemsControl Name="Universe" 
+        <ItemsControl Name="Universe" Margin="2 5 2 0"
                       ItemsSource="{Binding GameOfLifeWorld.GridCells, Mode=OneWay}" 
                       Grid.Row="2">
             <ItemsControl.ItemsPanel>
@@ -72,21 +77,19 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Grid Grid.Row="3" Margin="0 5 0 5">
+        <Grid Grid.Row="3" Margin=" 0 5 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Name="UniverseInfo" Grid.Column="0"
-                   HorizontalAlignment="Left">
+            <TextBlock Name="UniverseInfo" Grid.Column="0" HorizontalAlignment="Center">
                 <Run Text="Universe size = "/>
                 <Run Text="{Binding GameOfLifeWorld.TotalRows, Mode=OneTime}"/>
                 <Run Text=" x "/>
                 <Run Text="{Binding GameOfLifeWorld.TotalColumns, Mode=OneTime}"/>
             </TextBlock>
-            <TextBlock Name="generationNumber" Grid.Column="1"
-                       HorizontalAlignment="Center">
+            <TextBlock Name="generationNumber" Grid.Column="1" HorizontalAlignment="Center">
                 <Run Text="Generation: "/>
                 <Run Text="{Binding GameOfLifeWorld.ActualGeneration, Mode=OneWay}"/>
                 <Run Text=" of "/>

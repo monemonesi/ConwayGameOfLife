@@ -27,6 +27,7 @@ namespace ConwayGameOfLife.ViewModel
         public RelayCommand ResetGameCommand { get; set; }
         public RelayCommand NextGenCommand { get; set; }
         public RelayCommand NavigateToWiki { get; set; }
+        public RelayCommand PopulateRandom { get; set; }
 
         #region constructor
         public GameOfLifeVM()
@@ -42,8 +43,8 @@ namespace ConwayGameOfLife.ViewModel
             StopGameCommand = new RelayCommand(param => OnStopGame(), canExecute => true);
             NextGenCommand = new RelayCommand(param => OnNextGen(), canExecute => OnCanExecute());
             NavigateToWiki = new RelayCommand(param => OnNavigateToWiki(), canExecute => true);
+            PopulateRandom = new RelayCommand(param => OnPopulateRandom(), canExecute => OnCanExecute());
         }
-
         #endregion
 
         #region methods
@@ -74,7 +75,6 @@ namespace ConwayGameOfLife.ViewModel
             }
         }
 
-
         private bool OnCanExecute()
         {
             return GameOfLifeWorld != null && !GameOfLifeWorld.IsGameRunning;
@@ -101,7 +101,10 @@ namespace ConwayGameOfLife.ViewModel
             GameOfLifeWorld.ToggleCellState(pointer, gridWidthInPixel, gridHeightInPixel);
         }
 
-
+        private void OnPopulateRandom()
+        {
+            GameOfLifeWorld.PopulateRandom();
+        }
 
         private void OnGameOfLifeWorldPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

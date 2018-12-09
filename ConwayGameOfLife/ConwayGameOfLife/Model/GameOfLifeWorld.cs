@@ -54,7 +54,9 @@ namespace ConwayGameOfLife.Model
             }
         }
 
-        #region Constructur
+        Random rnd = new Random();
+
+        #region Constructors
         public GameOfLifeWorld(int numberOfRows, int numberOfCols)
         {
             TotalRows = numberOfRows;
@@ -95,7 +97,6 @@ namespace ConwayGameOfLife.Model
             {
                 cell.CurrentCellState = CellState.Dead;
             }
-            
         }
 
         internal void StopGame()
@@ -109,7 +110,6 @@ namespace ConwayGameOfLife.Model
             {
                 IsGameRunning = true;
                 RunGameAsync();
-
             }
         }
 
@@ -121,8 +121,6 @@ namespace ConwayGameOfLife.Model
 
         private async void RunGameAsync()
         {
-            //if (IsGameRunning)
-            //{
                 while (ActualGeneration < MaxGeneration)
                 {
                     EvaluateNextGen();
@@ -132,8 +130,6 @@ namespace ConwayGameOfLife.Model
                 }
 
                 IsGameRunning = false;
-            //}
-            
         }
 
         private void EvaluateNextGen()
@@ -146,31 +142,6 @@ namespace ConwayGameOfLife.Model
                 cell.CurrentCellState = nextState;
             }
         }
-
-        //private void RunGame()
-        //{
-        //    if (IsGameRunning)
-        //    {
-        //        while (ActualGeneration < MaxGeneration)
-        //        {
-        //            foreach (Cell cell in GridCells)
-        //            {
-        //                CellState currentState = cell.CurrentCellState;
-        //                int aliveNeighbours = GetNumberOfAliveNeighbours(cell.IndexCell);
-        //                CellState nextState = LifeRules.GetNextState(currentState, aliveNeighbours);
-        //                cell.CurrentCellState = nextState;
-
-        //            }
-        //            Thread.Sleep(10);
-        //            ActualGeneration++;
-        //        }
-
-        //        IsGameRunning = false;
-        //    }
-
-        //}
-
-
 
         private void DefineCellsNeighbours()
         {
@@ -269,7 +240,6 @@ namespace ConwayGameOfLife.Model
             {
                 //find the cell to toggle
                 Cell cellToToggle = GetCellFromGUI(point, gridWidthPixels, gridHeightPixels);
-
                 if (cellToToggle != null)
                 {
                     if (cellToToggle.CurrentCellState == CellState.Dead)
@@ -280,11 +250,24 @@ namespace ConwayGameOfLife.Model
                     {
                         cellToToggle.CurrentCellState = CellState.Dead;
                     }
-
                 }
-
             }
+        }
 
+        internal void PopulateRandom()
+        {
+            int maxStartingAliveCells = Convert.ToInt32( GridCells.Count * 0.5);
+            int startingAliveCells = 0;
+            while (startingAliveCells < maxStartingAliveCells)
+            {
+                int rowLoc = rnd.Next(TotalRows);
+                int colLoc = rnd.Next(TotalColumns);
+
+                Cell cellToToggle = GetCellByLocation(rowLoc, colLoc);
+                cellToToggle.CurrentCellState = CellState.Alive;
+
+                startingAliveCells++;
+            }
         }
 
         private Cell GetCellFromGUI(Point point, double gridWidthPixels, double gridHeightPixels)
